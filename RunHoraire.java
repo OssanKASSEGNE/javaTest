@@ -1,40 +1,46 @@
-import horaire.HeureException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
 import horaire.Horaire;
-import horaire.MinuteException;
+import java.util.function.Consumer; 
 
 public class RunHoraire {
     public static void main(final String[] args) {
-        final Horaire h1 = new Horaire();
         Horaire h2 = null;
+
         Horaire h3 = null;
-        try {
+        Horaire h4 = null;
 
-            h2 = new Horaire(122);
-        } catch (final HeureException e) {
-            System.out.println(e.getMessage());
+        h2 = new Horaire(12);
+        h4 = new Horaire(12);
 
-        } catch (final Exception e) {
+        h3 = new Horaire(14, 2);
 
-            System.out.println(e.getMessage());
+        if (h2.equals(h3))
+            System.out.println("Egaux");
+        else
+            System.out.println("Non égaux");
 
-        } finally {
-            if (h2 == null) {
-                h2 = new Horaire();
-            }
-        }
-        try {
-            h3 = new Horaire(14, 772);
-        } catch (HeureException | MinuteException e) {
-            System.out.println(e.getMessage());
-        }
+        if (h2.equals(h4))
+            System.out.println("Egaux");
+        else
+            System.out.println("Non égaux");
 
-        finally {
-            if (h3 == null) {
-                h3 = new Horaire();
-            }
-            System.out.println(h1);
-            System.out.println(h2);
-            System.out.println(h3);
-        }
+ 
+
+        final List<Horaire> listHoraires = Arrays.asList(new Horaire(), new Horaire(12), new Horaire(04, 5),
+                new Horaire(11, 52));
+        
+                // Déclaration
+       final Consumer <List<Horaire>> display = (list) -> {
+           for(final Horaire h : list) System.out.println(h);
+       };
+        //utilisation
+       display.accept(listHoraires);
+
+        Collections.sort(listHoraires);
+        display.accept(listHoraires);
+
+
     }
 }
